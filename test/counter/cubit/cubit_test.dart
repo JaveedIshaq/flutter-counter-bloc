@@ -15,6 +15,21 @@ void main() {
         act: (cubit) => cubit.increment(),
         expect: () => const <int>[1],
       );
+
+      blocTest<CounterCubit, int>(
+        'emit [1,2] when state is 0 and invoked twice',
+        build: () => CounterCubit(),
+        act: (cubit) => cubit
+          ..increment()
+          ..increment(),
+        expect: () => const <int>[1, 2],
+      );
+
+      blocTest<CounterCubit, int>('emit 42 when the state is 41',
+          build: () => CounterCubit(),
+          seed: () => 41,
+          act: (cubit) => cubit.increment(),
+          expect: () => const <int>[42]);
     });
   });
 }
