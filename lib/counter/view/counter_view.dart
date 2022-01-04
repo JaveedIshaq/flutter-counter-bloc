@@ -7,6 +7,8 @@ import 'package:flutter_counter/counter/cubit/counter_cubit.dart';
 /// [CounterCubit] state and notifies it in response to user input.
 /// {@endtemplate}
 class CounterView extends StatelessWidget {
+  const CounterView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;

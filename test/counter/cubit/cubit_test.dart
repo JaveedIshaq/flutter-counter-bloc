@@ -31,5 +31,34 @@ void main() {
           act: (cubit) => cubit.increment(),
           expect: () => const <int>[42]);
     });
+
+    group('Decrement', () {
+      /// Decrement by -1
+      blocTest<CounterCubit, int>(
+        'Emit -1 when state is 0',
+        build: () => CounterCubit(),
+        act: (cubit) => cubit.decrement(),
+        expect: () => const <int>[-1],
+      );
+
+      /// emits [-1, -2] when state is 0 and invoked twice
+      blocTest<CounterCubit, int>(
+        'emits [-1, -2] when state is 0 and invoked twice',
+        build: () => CounterCubit(),
+        act: (cubit) => cubit
+          ..decrement()
+          ..decrement(),
+        expect: () => const <int>[-1, -2],
+      );
+
+      /// emits [42] when state is 43
+      blocTest<CounterCubit, int>(
+        'emits [42] when state is 43',
+        build: () => CounterCubit(),
+        seed: () => 43,
+        act: (cubit) => cubit.decrement(),
+        expect: () => const <int>[42],
+      );
+    });
   });
 }
